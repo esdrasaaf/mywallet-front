@@ -30,7 +30,7 @@ export default function SignUpPage () {
     }
 
     return (
-        <MainContent>
+        <Container>
             <h1>My Wallet</h1>
 
             <FormContainer onSubmit={postRegister}>
@@ -42,11 +42,11 @@ export default function SignUpPage () {
             </FormContainer>
 
             <Link to={"/sign-up"}> Não tem uma conta? Registre-se aqui!</Link>
-        </MainContent>
+        </Container>
     )
 }
 
-const MainContent = styled.div`
+const Container = styled.div`
     background-color: #9056BF;
     height: 100vh;
     width: 100vw;
