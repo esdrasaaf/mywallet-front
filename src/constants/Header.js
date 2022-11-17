@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
-import logoutImg from '../assets/images/logout.png'
+import logoutImg from '../assets/images/logoutwhite.png'
 
 export default function Header () {
 

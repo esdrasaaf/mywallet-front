@@ -1,9 +1,12 @@
 import styled from "styled-components"
+import { useNavigate } from 'react-router-dom'
 
 export default function Input () {
+    const navigate = useNavigate('')
+
     function postInput(e) {
         e.preventDefault()
-        alert("deu bom")
+        navigate("/home")
     }
 
     return (

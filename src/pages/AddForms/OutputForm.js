@@ -1,10 +1,18 @@
+import { useNavigate } from "react-router-dom"
 import styled from "styled-components"
 
 export default function Output () {
+    const navigate = useNavigate('')
+
+    function postOutput(e) {
+        e.preventDefault()
+        navigate('/home')
+    }
+
     return (
         <Container>
             <h1>Nova saída</h1>
-            <FormContainer>
+            <FormContainer onSubmit={postOutput}>
                 <input placeholder="Valor"/>
                 <input placeholder="Descrição"/>
                 <button> Salvar saída </button>
