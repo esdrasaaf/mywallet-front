@@ -14,6 +14,7 @@ export default function Header () {
     )
 }
 
+//Styled Components
 const Container = styled.header`
     box-sizing: border-box;
     width: 100vw;

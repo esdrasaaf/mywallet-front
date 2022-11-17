@@ -46,6 +46,7 @@ export default function SignUpPage () {
     )
 }
 
+//Styled Components
 const Container = styled.div`
     background-color: #9056BF;
     height: 100vh;

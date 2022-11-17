@@ -6,12 +6,13 @@ import { Link } from "react-router-dom"
 export default function Footer () {
     return (
         <Content>
-            <Link><PlusButton/></Link>
-            <Link><MinunButton/></Link>
+            <Link to={"/add-input"}><PlusButton/></Link>
+            <Link to={"/add-output"}><MinunButton/></Link>
         </Content>
     )
 }
 
+//Styled Components
 const Content = styled.footer`
     padding: 16px 24px;
     width: 100vw;
