@@ -17,7 +17,7 @@ export default function Header () {
 //Styled Components
 const Container = styled.header`
     box-sizing: border-box;
-    width: 100vw;
+    width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;

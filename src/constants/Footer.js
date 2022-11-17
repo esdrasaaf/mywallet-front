@@ -15,9 +15,9 @@ export default function Footer () {
 //Styled Components
 const Content = styled.footer`
     padding: 16px 24px;
-    width: 100vw;
+    width: 100%;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     
     a {

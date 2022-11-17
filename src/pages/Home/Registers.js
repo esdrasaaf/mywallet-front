@@ -27,7 +27,8 @@ const Container = styled.div`
     align-items: center;
 `
 const RegistersList = styled.ul`
-    width: 90vw;
+    box-sizing: border-box;
+    width: 100%;
     height: 100%;
     background: #FFFFFF;
     border-radius: 5px;
