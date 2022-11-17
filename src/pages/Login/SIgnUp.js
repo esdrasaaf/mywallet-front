@@ -25,7 +25,7 @@ export default function SignUpPage () {
         })
 
         promisse.catch((err) => {
-            alert(err)
+            alert(err.response.data)
         })
     }
 
@@ -41,7 +41,7 @@ export default function SignUpPage () {
                 <button> Entrar </button>
             </FormContainer>
 
-            <Link to={"/sign-up"}> Não tem uma conta? Registre-se aqui!</Link>
+            <Link to={"/"}>Já possui uma conta? Logue aqui!</Link>
         </Container>
     )
 }
