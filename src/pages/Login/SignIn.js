@@ -1,6 +1,7 @@
 import styled from "styled-components"
 import { useNavigate, Link } from "react-router-dom"
-import { useState } from "react"
+import { useState, useContext} from "react"
+import { UserInfoContext } from "../../contexts/userInfo"
 import BASE_URL from "../../constants/url"
 import axios from "axios"
 
@@ -9,14 +10,15 @@ export default function SignInPage () {
     const navigate = useNavigate()
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const {setToken} =  useContext(UserInfoContext)
 
     function postLogin (e) {
         e.preventDefault()
         const promisse = axios.post(`${BASE_URL}/sign-in`, {email, password})
 
         promisse.then((res) => {
-            navigate("/home")
-            console.log(res)
+            setToken(res.data)
+            navigate("/registers")
         })
 
         promisse.catch((err) => {
