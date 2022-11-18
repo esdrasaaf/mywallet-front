@@ -49,6 +49,6 @@ const Balance = styled.div`
     }
 
     span {
-        color: ${props => props.isMajor > 0 ? "#03AC00" : "#C70000"};
+        color: ${props => props.isMajor >= 0 ? "#03AC00" : "#C70000"};
     }
 `

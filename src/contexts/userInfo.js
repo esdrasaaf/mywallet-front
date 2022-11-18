@@ -4,6 +4,7 @@ export const UserInfoContext = createContext ({})
 
 function UserInfoProvider ({children}) {
     const [token, setToken] = useState('')
+    const [status, setStatus] = useState([])
     
     const config = {
         headers: {
@@ -12,7 +13,7 @@ function UserInfoProvider ({children}) {
     }
 
     return (
-        <UserInfoContext.Provider value={{setToken, config}}>
+        <UserInfoContext.Provider value={{setToken, config, setStatus, status}}>
             {children}
         </UserInfoContext.Provider>
     )

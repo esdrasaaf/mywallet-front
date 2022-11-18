@@ -6,25 +6,28 @@ import BASE_URL from '../../constants/url'
 import { useContext, useEffect, useState} from "react"
 import { UserInfoContext } from '../../contexts/userInfo'
 import Balance from '../../components/Balance'
+import { useNavigate } from 'react-router-dom'
+import { XButton } from '../../components/DeleteButton'
 
 export default function RegistersPage () {
+    const navigate = useNavigate()
     const [registers, setRegisters] = useState([])
-    const { config } = useContext(UserInfoContext)
+    const { config, status } = useContext(UserInfoContext)
     const [name, setName] = useState('')
 
     useEffect(() => {
         const promisse = axios.get(`${BASE_URL}/registers`, config)
 
         promisse.then((res) => {
-            console.log(res)
             setName(res.data.user.name)
             setRegisters(res.data.registers)
         })
 
         promisse.catch((err) => {
             alert(err.response.data)
+            navigate('/')
         })
-    }, [config])
+    }, [config, navigate, status])
 
 
     return (
@@ -42,6 +45,7 @@ export default function RegistersPage () {
                                 <h1>{r.description}</h1>
                                 <span>{new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(r.value)}</span>
                             </div>
+                            <XButton id={r._id}/>
                         </ListItem> 
                     )
                 }
@@ -64,7 +68,7 @@ const Container = styled.div`
     align-items: center;
 `
 const RegistersList = styled.ul`
-    padding: 5px 5px;
+    padding: 5px 0px;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -95,7 +99,7 @@ const RegistersList = styled.ul`
     }
 `
 const ListItem = styled.li`
-    padding: 12px;
+    padding: 10px 0px;
     width: 100%;
     display: flex;
     align-items: center;
@@ -111,10 +115,13 @@ const ListItem = styled.li`
         align-items: center;
         width: 100%;
         display: flex;
-        margin-left: 10px;
     }
 
-    h2 { color: gray; }
+    h2 { 
+        color: gray; 
+        margin: 0px 10px;
+    }
+
     h1 { color: #000000; }
     span { color: ${props => props.type === "input" ? "#03AC00" : "#C70000"}; }
 `
