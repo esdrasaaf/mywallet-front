@@ -1,15 +1,31 @@
 import styled from 'styled-components'
-import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
+import { useContext } from "react"
+import { UserInfoContext } from "../contexts/userInfo"
 import logoutImg from '../assets/images/logoutwhite.png'
+import axios from 'axios'
+import BASE_URL from '../constants/url'
 
 export default function Header ({username}) {
+    const navigate = useNavigate()
+    const {config} =  useContext(UserInfoContext)
+
+    function logout () {
+        const promisse = axios.post(`${BASE_URL}/logout`, null, config)
+
+        promisse.then((res) => {
+            navigate("/")
+        })
+
+        promisse.catch((err) => {
+            alert(err.data)
+        })
+    }
 
     return (
         <Container>
             <h1> Olá, {username}</h1>
-            <Link to={"/"}>
-                <img src={logoutImg} alt="Imagem de logout"/>
-            </Link>
+            <img onClick={logout} src={logoutImg} alt="Imagem de logout"/>
         </Container>
     )
 }
