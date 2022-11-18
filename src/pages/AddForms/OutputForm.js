@@ -1,20 +1,40 @@
 import { useNavigate } from "react-router-dom"
 import styled from "styled-components"
+import { useState, useContext } from "react"
+import axios from 'axios'
+import dayjs from 'dayjs'
+import BASE_URL from "../../constants/url"
+import { UserInfoContext } from '../../contexts/userInfo'
 
 export default function Output () {
     const navigate = useNavigate('')
+    const { config } = useContext(UserInfoContext)
+    const [value, setValue] = useState('')
+    const [description, setDescription] = useState('')
+    const data = dayjs().format("DD/MM")
+
+    const body = {value, description, data}
 
     function postOutput(e) {
         e.preventDefault()
-        navigate('/home')
+
+        const promisse = axios.post(`${BASE_URL}/add-output`, body, config)
+
+        promisse.then((res) => {
+            navigate('/registers')
+        })
+
+        promisse.catch((err) => {
+            alert(err.response.data)
+        })
     }
 
     return (
         <Container>
             <h1>Nova saída</h1>
             <FormContainer onSubmit={postOutput}>
-                <input placeholder="Valor"/>
-                <input placeholder="Descrição"/>
+                <input type="text" required onChange={(e) => {setValue(e.target.value)}} placeholder="Valor"/>
+                <input type="text" required onChange={(e) => {setDescription(e.target.value)}} placeholder="Descrição"/>
                 <button> Salvar saída </button>
             </FormContainer>
         </Container>

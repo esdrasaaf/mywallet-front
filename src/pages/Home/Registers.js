@@ -9,37 +9,38 @@ import { UserInfoContext } from '../../contexts/userInfo'
 export default function RegistersPage () {
     const [registers, setRegisters] = useState([])
     const { config } = useContext(UserInfoContext)
-    console.log(config)
+    const [name, setName] = useState('')
 
     useEffect(() => {
         const promisse = axios.get(`${BASE_URL}/registers`, config)
 
         promisse.then((res) => {
-            setRegisters(res.data)
+            console.log(res)
+            setName(res.data.user.name)
+            setRegisters(res.data.registers)
         })
 
         promisse.catch((err) => {
-            alert(err.data)
+            alert(err.response.data)
         })
     }, [config])
 
 
     return (
         <Container>
-            <Header/>
+            <Header username={name}/>
 
             <RegistersList>
-                {registers.length === 0 
-                    ? 
+                {registers.length === 0 ? 
                     <p>Não há registros de entrada ou saída</p> 
-                    : 
-                    registers.map((r, idx) => {
-                        <ListItem>
-                            <p></p>
-                            <h1></h1>
-                            <span></span>
-                        </ListItem>
-                    })
+                : 
+                    registers.map((r, idx) => 
+                        <ListItem key={idx} type={r.type}>
+                            <p>{r.data}</p>
+                            <h1>{r.description}</h1>
+                            <span>{r.value}</span>
+                        </ListItem> 
+                    )
                 }
             </RegistersList>
 
@@ -91,6 +92,6 @@ const ListItem = styled.li`
 
     p { color: #C6C6C6; }
     h1 { color: #000000; }
-    span { color: green; }
+    span { color: ${props => props.type === "input" ? "#03AC00" : "#C70000"}; }
     
 `

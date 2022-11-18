@@ -1,12 +1,33 @@
 import styled from "styled-components"
 import { useNavigate } from 'react-router-dom'
+import { useState, useContext } from "react"
+import { UserInfoContext } from '../../contexts/userInfo'
+import axios from "axios"
+import dayjs from 'dayjs'
+import BASE_URL from "../../constants/url"
+
 
 export default function Input () {
     const navigate = useNavigate('')
+    const { config } = useContext(UserInfoContext)
+    const [value, setValue] = useState('')
+    const [description, setDescription] = useState('')
+    const data = dayjs().format("DD/MM")
+
+    const body = {value, description, data}
 
     function postInput(e) {
         e.preventDefault()
-        navigate("/home")
+
+        const promisse = axios.post(`${BASE_URL}/add-input`, body, config)
+
+        promisse.then((res) => {
+            navigate('/registers')
+        })
+
+        promisse.catch((err) => {
+            alert(err.response.data)
+        })
     }
 
     return (
@@ -14,8 +35,8 @@ export default function Input () {
             <h1>Nova entrada</h1>
 
             <FormContainer onSubmit={postInput}>
-                <input type="text" required placeholder="Valor"/>
-                <input type="text" required placeholder="Descrição"/>
+                <input type="text" required onChange={(e) => {setValue(e.target.value)}} placeholder="Valor"/>
+                <input type="text" required onChange={(e) => {setDescription(e.target.value)}} placeholder="Descrição"/>
                 <button> Salvar entrada </button>
             </FormContainer>
         </Container>

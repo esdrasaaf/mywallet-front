@@ -2,11 +2,11 @@ import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 import logoutImg from '../assets/images/logoutwhite.png'
 
-export default function Header () {
+export default function Header ({username}) {
 
     return (
         <Container>
-            <h1> Olá, {"fulano"}</h1>
+            <h1> Olá, {username}</h1>
             <Link to={"/"}>
                 <img src={logoutImg} alt="Imagem de logout"/>
             </Link>
