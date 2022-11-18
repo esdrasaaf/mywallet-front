@@ -5,6 +5,7 @@ import axios from 'axios'
 import BASE_URL from '../../constants/url'
 import { useContext, useEffect, useState} from "react"
 import { UserInfoContext } from '../../contexts/userInfo'
+import Balance from '../../components/Balance'
 
 export default function RegistersPage () {
     const [registers, setRegisters] = useState([])
@@ -36,12 +37,15 @@ export default function RegistersPage () {
                 : 
                     registers.map((r, idx) => 
                         <ListItem key={idx} type={r.type}>
-                            <p>{r.data}</p>
-                            <h1>{r.description}</h1>
-                            <span>{r.value}</span>
+                            <h2>{r.data}</h2>
+                            <div>
+                                <h1>{r.description}</h1>
+                                <span>{new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(r.value)}</span>
+                            </div>
                         </ListItem> 
                     )
                 }
+                <Balance transations={registers}/> 
             </RegistersList>
 
             <Footer/>
@@ -60,27 +64,39 @@ const Container = styled.div`
     align-items: center;
 `
 const RegistersList = styled.ul`
+    padding: 5px 5px;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: flex-start;
     align-items: center;
     box-sizing: border-box;
+    overflow-y: auto;
     width: 100%;
     height: 100%;
     background: #FFFFFF;
     border-radius: 5px;
-
+    margin-bottom: 80px;
+    
+    &::-webkit-scrollbar{
+        display: none;
+    }
+    
     p {
+        display: flex;
         width: 180px;
-        height: 46px;
+        height: 100%;
         font-family: 'Raleway';
         font-weight: 400;
         font-size: 20px;
         line-height: 23px;
-        text-align: center;
+        justify-content: center;
+        align-items: center;
         color: #868686;
     }
 `
 const ListItem = styled.li`
+    padding: 12px;
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -90,8 +106,15 @@ const ListItem = styled.li`
     font-size: 16px;
     line-height: 19px;
 
-    p { color: #C6C6C6; }
+    div {
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        display: flex;
+        margin-left: 10px;
+    }
+
+    h2 { color: gray; }
     h1 { color: #000000; }
     span { color: ${props => props.type === "input" ? "#03AC00" : "#C70000"}; }
-    
 `

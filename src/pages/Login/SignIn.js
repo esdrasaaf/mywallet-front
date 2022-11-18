@@ -22,7 +22,7 @@ export default function SignInPage () {
         })
 
         promisse.catch((err) => {
-            alert(err.response.data)
+            alert(err.data)
         })
     }
 

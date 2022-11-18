@@ -20,8 +20,8 @@ export default function SignUpPage () {
         const promisse = axios.post(`${BASE_URL}/sign-up`, {name, email, password})
 
         promisse.then((res) => {
-            navigate("/home")
-            console.log(res)
+            navigate("/")
+            console.log(res.data)
         })
 
         promisse.catch((err) => {
@@ -38,7 +38,7 @@ export default function SignUpPage () {
                 <input required type="email" onChange={(e) => setEmail(e.target.value)} placeholder={"E-mail"}/>
                 <input required type="password" onChange={(e) => setPassword(e.target.value)} placeholder={"Senha"}/>
                 <input required type="password" onChange={(e) => setConfirmedPass(e.target.value)} placeholder={"Confirme a senha"}/>
-                <button> Entrar </button>
+                <button> Logar </button>
             </FormContainer>
 
             <Link to={"/"}>Já possui uma conta? Logue aqui!</Link>
