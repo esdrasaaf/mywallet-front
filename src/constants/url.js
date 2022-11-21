@@ -1,2 +1,2 @@
-const BASE_URL = "http://localhost:5000"
+const BASE_URL = "https://mywallet-api-s9hc.onrender.com"
 export default BASE_URL

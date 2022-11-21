@@ -95,5 +95,6 @@ const FormContainer = styled.form`
         border: none;
         background: #A328D6;
         border-radius: 5px;
+        cursor: pointer;
     }
 `
